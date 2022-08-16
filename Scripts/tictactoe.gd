@@ -4,37 +4,13 @@ enum BOARD_STATE {EMPTY= 0, X=-1, O=1};
 var board: Array;
 var ai_symbol : int = BOARD_STATE.X;
 var debug_mode : bool = false;
+var textInput : TextEdit;
 
 func _ready() -> void:
 	for i in range(9):
 		board.append(BOARD_STATE.EMPTY);
-	var new_board : Array;
-	
-	new_board = board.duplicate(true);
-	new_board[0] = ai_symbol
-	drawDebugBoard(new_board);
-	print(minimax2(new_board,false))
-	
-	new_board = board.duplicate(true);
-	new_board[1] = ai_symbol
-	drawDebugBoard(new_board);
-	print(minimax2(new_board,false))
-	
-	new_board = board.duplicate(true);
-	new_board[2] = ai_symbol
-	drawDebugBoard(new_board);
-	print(minimax2(new_board,false))
-	
-	new_board = board.duplicate(true);
-	new_board[3] = ai_symbol
-	drawDebugBoard(new_board);
-	print(minimax2(new_board,false))
-	
-	new_board = board.duplicate(true);
-	new_board[4] = ai_symbol
-	drawDebugBoard(new_board);
-	print(minimax2(new_board,false))
-
+	drawDebugBoard(board);
+	textInput = $TextEdit;
 	pass
 	
 func drawDebugBoard(aux_board):
@@ -82,7 +58,7 @@ func geraRamificacoes(aux_board : Array, ai_turn : bool) -> Array:
 			branches.append(new_board);
 	return branches;
 
-func minimax2(aux_board : Array, ai_turn : bool) -> int:
+func minimax(aux_board : Array, ai_turn : bool) -> Array:
 	
 	#Avalia se o jogo acabou.
 	var end : int = endgame(aux_board);
@@ -90,39 +66,61 @@ func minimax2(aux_board : Array, ai_turn : bool) -> int:
 		#Se o jogo acabou, retorna o score do resultado final.
 		if debug_mode:
 			print("ENDGAME Value: " + str(end));
-		return end;
+		return [end, aux_board];
 		
 	var valor : int;
+	var bestBranches : Array;
+	
 	var branches = geraRamificacoes(aux_board,ai_turn);
 	if debug_mode:
 		print("\nBranches\n")
 		for b in branches:
 			drawDebugBoard(b)
 			
-	var valores : Array;
+	var debugValores : Array;
 	if ai_turn:
 		#Se for o turno da IA
 		valor = -9;
 		for new_board in branches:
-			var new_value : int = minimax2(new_board,!ai_turn);
-			valores.append(new_value)
-			valor = max(valor,new_value);
+			var new_value : int = minimax(new_board,!ai_turn)[0];
+			debugValores.append(new_value)
+			
+			if new_value == valor:
+				bestBranches.append(new_board)
+			elif  new_value > valor:
+				bestBranches.clear()
+				bestBranches.append(new_board)
+				valor = new_value
+			
 	else:
 		#Se for o turno do jogador
 		valor = 9;
 		for new_board in branches:
-			var new_value : int = minimax2(new_board,!ai_turn);
-			valores.append(new_value)
-			valor = min(valor,new_value);
+			var new_value : int = minimax(new_board,!ai_turn)[0];
+			debugValores.append(new_value)
+			if new_value == valor:
+				bestBranches.append(new_board)
+			elif  new_value < valor:
+				bestBranches.clear()
+				bestBranches.append(new_board)
+				valor = new_value
 			
 	if debug_mode:
 		print("\nMinimax Result\n");
 		drawDebugBoard(aux_board);
 		print("Turno da IA? " + str(ai_turn))
-		print(valores)
+		print(debugValores)
 		print(valor)
-	return valor;
+	return [valor,bestBranches];
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta: float) -> void:
-#	pass
+func _process(delta: float) -> void:
+	pass
+
+
+func _on_Button_pressed() -> void:
+	var play = $TextEdit.text as int;
+	board[play] = -ai_symbol;
+	drawDebugBoard(board);
+	var minmax = minimax(board, true);
+	board = minmax[1][0]
+	drawDebugBoard(board);
