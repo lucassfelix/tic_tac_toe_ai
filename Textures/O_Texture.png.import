@@ -1,0 +1,13 @@
+[remap]
+
+importer="image"
+type="Image"
+path="res://.import/O_Texture.png-89c90f6e656b3eb8ca9f6db219080952.image"
+
+[deps]
+
+source_file="res://Textures/O_Texture.png"
+dest_files=[ "res://.import/O_Texture.png-89c90f6e656b3eb8ca9f6db219080952.image" ]
+
+[params]
+
