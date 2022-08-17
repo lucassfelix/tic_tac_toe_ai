@@ -24,7 +24,7 @@ func drawDebugBoard(aux_board):
 	print()
 
 func endgame(c_board):
-	for row in range(3):
+	for row in range(0,7,3):
 		if c_board[row] != BOARD_STATE.EMPTY and	c_board[row+1] != BOARD_STATE.EMPTY and c_board[row+2] != BOARD_STATE.EMPTY and c_board[row] == c_board[row+1] and c_board[row+1] == c_board[row+2]:
 			return 1 if c_board[row] == ai_symbol else -1
 	for col in range(3):
@@ -92,5 +92,6 @@ func _on_Button_pressed() -> void:
 	board[play] = -ai_symbol;
 	drawDebugBoard(board);
 	var minmax = minimax(board, true);
+	print(minmax)
 	board = minmax[1][0]
 	drawDebugBoard(board);
