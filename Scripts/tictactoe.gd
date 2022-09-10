@@ -1,13 +1,12 @@
 extends Node2D
 
-enum BOARD_STATE {EMPTY= 0, X=-1, O=1};
-var board: Array;
-var ai_symbol : int = BOARD_STATE.X;
+var board: Array
+var ai_symbol : int = BOARD_STATE.X
 
 func _ready() -> void:
 	for _i in range(9):
-		board.append(BOARD_STATE.EMPTY);
-	drawDebugBoard(board);
+		board.append(BOARD_STATE.EMPTY)
+	drawDebugBoard(board)
 	pass
 	
 func drawDebugBoard(aux_board):
@@ -41,31 +40,32 @@ func endgame(c_board):
 	return 2
 
 func geraRamificacoes(aux_board : Array, ai_turn : bool) -> Array:
-	var branches : Array = [];
+	var branches : Array = []
 	for index in range(9):
 		if aux_board[index] == BOARD_STATE.EMPTY:
-			var new_board = aux_board.duplicate(true);
-			new_board[index] = ai_symbol if ai_turn else -ai_symbol;
-			branches.append(new_board);
-	return branches;
+			var new_board = aux_board.duplicate(true)
+			new_board[index] = ai_symbol if ai_turn else -ai_symbol
+			branches.append(new_board)
+	return branches
+	
 
 func minimax(aux_board : Array, ai_turn : bool) -> Array:
 	
 	#Avalia se o jogo acabou.
-	var end : int = endgame(aux_board);
+	var end : int = endgame(aux_board)
 	if end != 2:
 		#Se o jogo acabou, retorna o score do resultado final.
-		return [end, [aux_board]];
+		return [end, [aux_board]]
 		
-	var valor : int;
-	var bestBranches : Array = [];
+	var valor : int
+	var bestBranches : Array = []
 	
-	var branches = geraRamificacoes(aux_board,ai_turn);
+	var branches = geraRamificacoes(aux_board,ai_turn)
 	if ai_turn:
 		#Se for o turno da IA
-		valor = -9;
+		valor = -9
 		for new_board in branches:
-			var new_value : int = minimax(new_board,!ai_turn)[0];
+			var new_value : int = minimax(new_board,!ai_turn)[0]
 			
 			if new_value == valor:
 				bestBranches.append(new_board)
@@ -76,22 +76,22 @@ func minimax(aux_board : Array, ai_turn : bool) -> Array:
 			
 	else:
 		#Se for o turno do jogador
-		valor = 9;
+		valor = 9
 		for new_board in branches:
-			var new_value : int = minimax(new_board,!ai_turn)[0];
+			var new_value : int = minimax(new_board,!ai_turn)[0]
 			if new_value == valor:
 				bestBranches.append(new_board)
 			elif  new_value < valor:
 				bestBranches.clear()
 				bestBranches.append(new_board)
 				valor = new_value
-	return [valor,bestBranches];
+	return [valor,bestBranches]
 
 func _on_Button_pressed() -> void:
-	var play = $TextEdit.text as int;
-	board[play] = -ai_symbol;
-	drawDebugBoard(board);
-	var minmax = minimax(board, true);
+	var play = $TextEdit.text as int
+	board[play] = -ai_symbol
+	drawDebugBoard(board)
+	var minmax = minimax(board, true)
 	print(minmax)
 	board = minmax[1][0]
-	drawDebugBoard(board);
+	drawDebugBoard(board)
