@@ -1,17 +1,32 @@
 extends Node
 
-
-# Declare member variables here. Examples:
-# var a = 2
-# var b = "text"
-
 const ai_state = -1
+
+export(Resource) var board_size_resource
+var board_size : IntegerVar
+
+export(Resource) var empty_piece_resource
+var EMPTY_PIECE : Piece
+
+export(Resource) var player_ai_resource
+var AI_PIECE : Piece
+
+
+func _ready():
+	print(board_size.get_class())
+	print(board_size_resource.get_class())
+	assert(typeof(board_size) == typeof(board_size_resource), "ERROR: Wrong type of resource. (" + board_size.get_class() + board_size_resource.get_class() + ")")		
+	board_size = board_size_resource
+	EMPTY_PIECE = empty_piece_resource
+	AI_PIECE = player_ai_resource
+	pass
+
 
 func choose_ai_play() -> void:
 	pass
 	
 	
-static func minimax(board : Array, current_player : int) -> Array:
+func minimax(board : Array, ai_turn : bool) -> Array:
 	
 	var endgame : int =  Board.endgame(board,ai_state)
 	
@@ -23,20 +38,22 @@ static func minimax(board : Array, current_player : int) -> Array:
 	
 	for row in range(len(board)):
 		for col in range(len(board)):
-			if board[row][col] == Board.BOARD_STATE.EMPTY:
-				board[row][col] = current_player
-				var result = minimax(board, -current_player)
+			if board[row][col] == EMPTY_PIECE.value:
 				
-				if current_player == ai_state:
+				board[row][col]
+				
+				var result = minimax(board, !ai_turn)
+				
+				if ai_turn:
 					if result[0] > max_play[0]:
 						max_play = [result[0],[row,col]]
 				else:
 					if result[0] < min_play[0]:
 						min_play = [result[0],[row,col]]
 			
-				board[row][col] = Board.BOARD_STATE.EMPTY
+				board[row][col] = Board.BOARD_PIECE.EMPTY
 			
-	if current_player == ai_state:
+	if ai_turn:
 		return max_play
 	else:
 		return min_play
@@ -44,8 +61,7 @@ static func minimax(board : Array, current_player : int) -> Array:
 
 
 # Called when the node enters the scene tree for the first time.
-func _ready():
-	pass # Replace with function body.
+
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
