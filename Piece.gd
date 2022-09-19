@@ -1,6 +1,6 @@
 extends Resource
 class_name Piece
 
-export(String) var name = "EMPTY" 
+export(String) var piece_name = " " 
 export(int) var value = 0
-export(Texture) var image = null
+export(Texture) var texture = null

@@ -1,14 +1,21 @@
-extends Node2D
+extends TextureButton
 
+var pos : Array
+var piece : Piece
 
-export var pos_x : int
-export var pos_y : int
-
-
-func _ready():
+func _ready() -> void:
 	pass
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
-#	pass
-
+func set_piece(new_piece : Piece):
+	
+	piece = new_piece
+	update_sprite()
+	pass
+	
+func update_sprite():
+	set_normal_texture(piece.texture)
+	pass
+	
+func set_pos(new_pos : Array):
+	pos = new_pos
+	

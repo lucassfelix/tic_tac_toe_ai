@@ -1,0 +1,23 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://Scripts/Board.gd" type="Script" id=1]
+[ext_resource path="res://Resources/Variables/BoardSize.tres" type="Resource" id=2]
+[ext_resource path="res://Resources/Pieces/X_Piece.tres" type="Resource" id=3]
+[ext_resource path="res://Resources/Pieces/Empty_Piece.tres" type="Resource" id=4]
+[ext_resource path="res://Resources/Pieces/O_Piece.tres" type="Resource" id=5]
+[ext_resource path="res://Scenes/BoardPiece.tscn" type="PackedScene" id=6]
+
+[node name="Board" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 1 )
+pieces = [ ExtResource( 4 ), ExtResource( 5 ), ExtResource( 3 ) ]
+ai_node_path = NodePath("../AI")
+board_size_resource = ExtResource( 2 )
+board_piece = ExtResource( 6 )
+
+[node name="Rows" type="VBoxContainer" parent="."]
+margin_left = 390.0
+margin_top = 110.0
+margin_right = 890.0
+margin_bottom = 610.0

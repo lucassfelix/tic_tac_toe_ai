@@ -1,23 +1,15 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=5 format=2]
 
-[ext_resource path="res://Scenes/BoardPiece.tscn" type="PackedScene" id=1]
-[ext_resource path="res://Scripts/Board.gd" type="Script" id=2]
+[ext_resource path="res://Scenes/Board.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scripts/AIPlayer.gd" type="Script" id=3]
-[ext_resource path="res://Resources/Variables/BoardSize.tres" type="Resource" id=4]
 [ext_resource path="res://Resources/Pieces/Empty_Piece.tres" type="Resource" id=5]
 [ext_resource path="res://Resources/Pieces/X_Piece.tres" type="Resource" id=6]
 
-[node name="MainScene" type="Node2D"]
+[node name="MainScene" type="Node"]
 
 [node name="AI" type="Node" parent="."]
 script = ExtResource( 3 )
-board_size_resource = ExtResource( 4 )
 empty_piece_resource = ExtResource( 5 )
 player_ai_resource = ExtResource( 6 )
 
-[node name="BoardPiece" parent="." instance=ExtResource( 1 )]
-position = Vector2( 287, 143 )
-
-[node name="Board" type="Node2D" parent="."]
-script = ExtResource( 2 )
-board_size_resource = ExtResource( 4 )
+[node name="Board" parent="." instance=ExtResource( 1 )]

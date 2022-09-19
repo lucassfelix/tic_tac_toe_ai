@@ -8,4 +8,6 @@ func get_value() -> int:
 
 func set_value(new_value : int) -> void:
 	value = new_value
-	ResourceSaver.save(resource_path, self)
+	var err := ResourceSaver.save(resource_path, self)
+	if err:
+		print("Falha ao salvar!")

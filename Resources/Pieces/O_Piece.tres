@@ -1,10 +1,10 @@
 [gd_resource type="Resource" load_steps=3 format=2]
 
 [ext_resource path="res://Piece.gd" type="Script" id=1]
-[ext_resource path="res://Textures/X_Image.png" type="Texture" id=2]
+[ext_resource path="res://Textures/O_Texture.png" type="Texture" id=2]
 
 [resource]
 script = ExtResource( 1 )
-name = "X"
-value = -1
-image = ExtResource( 2 )
+piece_name = "O"
+value = 1
+texture = ExtResource( 2 )
