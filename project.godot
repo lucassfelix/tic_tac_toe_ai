@@ -39,13 +39,21 @@ _global_script_class_icons={
 [application]
 
 config/name="Tic Tac Toe IA"
-run/main_scene="res://Scenes/MainScene.tscn"
+run/main_scene="res://Scenes/TitleScreen.tscn"
+boot_splash/bg_color=Color( 0.298039, 0.0705882, 0.0705882, 1 )
 config/icon="res://icon.png"
 
 [display]
 
-window/size/width=1280
-window/size/height=720
+window/size/width=1920
+window/size/height=1080
+window/size/resizable=false
+window/size/borderless=true
+window/size/fullscreen=true
+window/stretch/mode="viewport"
+window/stretch/aspect="keep"
+window/bg_color=Color( 0.141176, 0.141176, 0.141176, 1 )
+window/use_filter=false
 
 [gui]
 
@@ -60,5 +68,5 @@ common/enable_pause_aware_picking=true
 quality/driver/driver_name="GLES2"
 vram_compression/import_etc=true
 vram_compression/import_etc2=false
-environment/default_clear_color=Color( 0.14902, 0.192157, 0.219608, 1 )
+environment/default_clear_color=Color( 0.941176, 0.929412, 0.894118, 1 )
 environment/default_environment="res://default_env.tres"

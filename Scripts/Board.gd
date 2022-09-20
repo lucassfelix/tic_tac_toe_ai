@@ -22,24 +22,19 @@ var game_has_ended : bool
 func _ready():
 	
 	ai_node = get_node(ai_node_path)
-	var rows = $Rows
+	var grid = $GridContainer
 	board_size = board_size_resource
-	
+	grid.columns = board_size.value
 	game_board = []
 	for i in range(board_size.value):
 		game_board.append([])
-		var new_hbox := HBoxContainer.new()
-		rows.add_child(new_hbox)
-		new_hbox.size_flags_horizontal = SIZE_FILL
-		new_hbox.size_flags_vertical = SIZE_EXPAND_FILL
 		for j in range(board_size.value):
 			var new_bp := board_piece.instance()
-			new_hbox.add_child(new_bp)
-			new_bp.size_flags_horizontal = SIZE_EXPAND
+			grid.add_child(new_bp)
 			new_bp.set_pos([i,j])
-			new_bp.set_piece(pieces[BOARD_PIECE.X])
+			new_bp.set_piece(pieces[BOARD_PIECE.EMPTY])
 			game_board[i].append(new_bp)
-	
+	grid.set_anchors_preset(Control.PRESET_CENTER)	
 	draw_debug_board(game_board)
 
 

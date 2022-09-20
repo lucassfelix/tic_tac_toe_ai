@@ -1,7 +1,7 @@
 [gd_resource type="Resource" load_steps=3 format=2]
 
 [ext_resource path="res://Piece.gd" type="Script" id=1]
-[ext_resource path="res://Textures/O_Texture.png" type="Texture" id=2]
+[ext_resource path="res://Assets/Peça clara.png" type="Texture" id=2]
 
 [resource]
 script = ExtResource( 1 )
