@@ -1,0 +1,36 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://Font/NotoSerif-Black.ttf" type="DynamicFontData" id=2]
+[ext_resource path="res://Assets/Botão de rádio.png" type="Texture" id=3]
+[ext_resource path="res://Assets/Botão de rádio vazio.png" type="Texture" id=4]
+
+[sub_resource type="DynamicFont" id=3]
+size = 24
+extra_spacing_char = 7
+font_data = ExtResource( 2 )
+
+[sub_resource type="ButtonGroup" id=4]
+resource_local_to_scene = false
+
+[node name="RadioButton" type="CheckBox"]
+margin_top = 12.0
+margin_right = 170.0
+margin_bottom = 54.0
+focus_mode = 0
+mouse_default_cursor_shape = 2
+custom_colors/font_color_focus = Color( 0.952941, 0.317647, 0.317647, 1 )
+custom_colors/font_color_hover_pressed = Color( 0.952941, 0.317647, 0.317647, 1 )
+custom_colors/font_color = Color( 0.129412, 0.129412, 0.129412, 1 )
+custom_colors/font_color_hover = Color( 0.129412, 0.129412, 0.129412, 1 )
+custom_colors/font_color_pressed = Color( 0.952941, 0.317647, 0.317647, 1 )
+custom_constants/hseparation = 23
+custom_fonts/font = SubResource( 3 )
+custom_icons/radio_checked = ExtResource( 3 )
+custom_icons/checked = ExtResource( 3 )
+custom_icons/radio_unchecked = ExtResource( 4 )
+custom_icons/unchecked = ExtResource( 4 )
+shortcut_in_tooltip = false
+action_mode = 0
+enabled_focus_mode = 0
+group = SubResource( 4 )
+text = "TRIVIAL"

@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Textura do botão.png-a45f1ef6e89f387f4852f250a043c5af.stex"
+path="res://.import/Tarja de pausa.png-1388c951a4ba5915394379eb0f1561df.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Textura do botão.png"
-dest_files=[ "res://.import/Textura do botão.png-a45f1ef6e89f387f4852f250a043c5af.stex" ]
+source_file="res://Assets/Tarja de pausa.png"
+dest_files=[ "res://.import/Tarja de pausa.png-1388c951a4ba5915394379eb0f1561df.stex" ]
 
 [params]
 

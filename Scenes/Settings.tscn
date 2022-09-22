@@ -1,0 +1,222 @@
+[gd_scene load_steps=12 format=2]
+
+[ext_resource path="res://Scenes/MenuButton.gd" type="Script" id=1]
+[ext_resource path="res://Font/NotoSerif-Black.ttf" type="DynamicFontData" id=2]
+[ext_resource path="res://Assets/Fundo.png" type="Texture" id=3]
+[ext_resource path="res://Assets/Letreiro.png" type="Texture" id=4]
+[ext_resource path="res://Assets/Brush escuro.png" type="Texture" id=5]
+[ext_resource path="res://InitialMovement.tres" type="ButtonGroup" id=6]
+[ext_resource path="res://DifficultyGroup.tres" type="ButtonGroup" id=7]
+[ext_resource path="res://Scenes/Prefabs/RadioButton.tscn" type="PackedScene" id=8]
+[ext_resource path="res://VersusGroup.tres" type="ButtonGroup" id=9]
+
+[sub_resource type="DynamicFont" id=1]
+size = 32
+font_data = ExtResource( 2 )
+
+[sub_resource type="DynamicFont" id=2]
+size = 48
+extra_spacing_char = 7
+font_data = ExtResource( 2 )
+
+[node name="Settings" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="Fundo" type="TextureRect" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = -420.0
+margin_right = 1920.0
+margin_bottom = 2340.0
+rect_scale = Vector2( 0.5, 0.5 )
+texture = ExtResource( 3 )
+
+[node name="LetreiroEsquerda" type="TextureRect" parent="."]
+modulate = Color( 1, 1, 1, 0.14902 )
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+margin_left = -239.0
+margin_top = -614.5
+margin_right = -51.0
+margin_bottom = 614.5
+texture = ExtResource( 4 )
+
+[node name="Voltar" type="Button" parent="."]
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = -500.0
+margin_top = -243.0
+margin_right = 500.0
+margin_bottom = -117.0
+focus_mode = 0
+mouse_default_cursor_shape = 2
+size_flags_vertical = 3
+custom_colors/font_color = Color( 0.129412, 0.129412, 0.129412, 1 )
+custom_colors/font_color_hover = Color( 1, 1, 1, 1 )
+custom_fonts/font = SubResource( 1 )
+enabled_focus_mode = 0
+text = "VOLTAR AO MENU"
+flat = true
+icon_align = 1
+script = ExtResource( 1 )
+hovered_texture = ExtResource( 5 )
+
+[node name="Options" type="VBoxContainer" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -960.0
+margin_top = -435.5
+margin_right = 960.0
+margin_bottom = 235.5
+
+[node name="Versus" type="HBoxContainer" parent="Options"]
+margin_right = 1920.0
+margin_bottom = 221.0
+size_flags_vertical = 3
+custom_constants/separation = 79
+alignment = 1
+
+[node name="VS_Label" type="Label" parent="Options/Versus"]
+margin_top = 77.0
+margin_right = 920.0
+margin_bottom = 144.0
+size_flags_horizontal = 3
+custom_colors/font_color = Color( 0.129412, 0.129412, 0.129412, 1 )
+custom_fonts/font = SubResource( 2 )
+text = "MODO"
+align = 2
+valign = 1
+
+[node name="VS_Choices" type="VBoxContainer" parent="Options/Versus"]
+margin_left = 999.0
+margin_right = 1920.0
+margin_bottom = 221.0
+size_flags_horizontal = 3
+alignment = 1
+
+[node name="VS_Cpu" parent="Options/Versus/VS_Choices" instance=ExtResource( 8 )]
+margin_top = 66.0
+margin_right = 921.0
+margin_bottom = 108.0
+pressed = true
+group = ExtResource( 9 )
+text = "VS. COMPUTADOR"
+
+[node name="VS_Player" parent="Options/Versus/VS_Choices" instance=ExtResource( 8 )]
+margin_top = 112.0
+margin_right = 921.0
+margin_bottom = 154.0
+group = ExtResource( 9 )
+text = "VS. JOGADOR"
+
+[node name="Difficulty" type="HBoxContainer" parent="Options"]
+margin_top = 225.0
+margin_right = 1920.0
+margin_bottom = 446.0
+size_flags_vertical = 3
+custom_constants/separation = 79
+alignment = 1
+
+[node name="DIFF_Label" type="Label" parent="Options/Difficulty"]
+margin_top = 77.0
+margin_right = 920.0
+margin_bottom = 144.0
+size_flags_horizontal = 3
+custom_colors/font_color = Color( 0.129412, 0.129412, 0.129412, 1 )
+custom_fonts/font = SubResource( 2 )
+text = "DIFICULDADE"
+align = 2
+valign = 1
+
+[node name="DIFF_Choices" type="VBoxContainer" parent="Options/Difficulty"]
+margin_left = 999.0
+margin_right = 1920.0
+margin_bottom = 221.0
+size_flags_horizontal = 3
+alignment = 1
+
+[node name="DIFF_Trivial" parent="Options/Difficulty/DIFF_Choices" instance=ExtResource( 8 )]
+margin_top = 20.0
+margin_right = 921.0
+margin_bottom = 62.0
+group = ExtResource( 7 )
+
+[node name="DIFF_Easy" parent="Options/Difficulty/DIFF_Choices" instance=ExtResource( 8 )]
+margin_top = 66.0
+margin_right = 921.0
+margin_bottom = 108.0
+group = ExtResource( 7 )
+text = "FÁCIL"
+
+[node name="DIFF_Medium" parent="Options/Difficulty/DIFF_Choices" instance=ExtResource( 8 )]
+margin_top = 112.0
+margin_right = 921.0
+margin_bottom = 154.0
+pressed = true
+group = ExtResource( 7 )
+text = "MÉDIO"
+
+[node name="DIFF_Hard" parent="Options/Difficulty/DIFF_Choices" instance=ExtResource( 8 )]
+margin_top = 158.0
+margin_right = 921.0
+margin_bottom = 200.0
+group = ExtResource( 7 )
+text = "DIFÍCIL"
+
+[node name="InitialMovement" type="HBoxContainer" parent="Options"]
+margin_top = 450.0
+margin_right = 1920.0
+margin_bottom = 671.0
+size_flags_vertical = 3
+custom_constants/separation = 79
+alignment = 1
+
+[node name="MOV_Label" type="Label" parent="Options/InitialMovement"]
+margin_right = 920.0
+margin_bottom = 221.0
+size_flags_horizontal = 3
+size_flags_vertical = 5
+custom_colors/font_color = Color( 0.129412, 0.129412, 0.129412, 1 )
+custom_fonts/font = SubResource( 2 )
+text = "MOVIMENTO INICIAL"
+align = 2
+valign = 1
+
+[node name="MOV_Choices" type="VBoxContainer" parent="Options/InitialMovement"]
+margin_left = 999.0
+margin_right = 1920.0
+margin_bottom = 221.0
+size_flags_horizontal = 3
+alignment = 1
+
+[node name="MOV_Player" parent="Options/InitialMovement/MOV_Choices" instance=ExtResource( 8 )]
+margin_top = 43.0
+margin_right = 921.0
+margin_bottom = 85.0
+group = ExtResource( 6 )
+text = "JOGADOR"
+
+[node name="MOV_Cpu" parent="Options/InitialMovement/MOV_Choices" instance=ExtResource( 8 )]
+margin_top = 89.0
+margin_right = 921.0
+margin_bottom = 131.0
+group = ExtResource( 6 )
+text = "COMPUTADOR"
+
+[node name="MOV_Rand" parent="Options/InitialMovement/MOV_Choices" instance=ExtResource( 8 )]
+margin_top = 135.0
+margin_right = 921.0
+margin_bottom = 177.0
+pressed = true
+group = ExtResource( 6 )
+text = "ALEATÓRIO"
+
+[connection signal="mouse_entered" from="Voltar" to="Voltar" method="_on_Button_mouse_entered"]
+[connection signal="mouse_exited" from="Voltar" to="Voltar" method="_on_Button_mouse_exited"]
