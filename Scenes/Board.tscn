@@ -6,7 +6,7 @@
 [ext_resource path="res://Resources/Pieces/Empty_Piece.tres" type="Resource" id=4]
 [ext_resource path="res://Resources/Pieces/O_Piece.tres" type="Resource" id=5]
 [ext_resource path="res://Scenes/Prefabs/BoardSlot.tscn" type="PackedScene" id=6]
-[ext_resource path="res://Assets/Fundo tabuleiro.png" type="Texture" id=7]
+[ext_resource path="res://Assets/BackgroundBoard.png" type="Texture" id=7]
 [ext_resource path="res://Assets/Vinheta.png" type="Texture" id=8]
 [ext_resource path="res://Scripts/AIPlayer.gd" type="Script" id=9]
 [ext_resource path="res://Assets/PausePanel.png" type="Texture" id=10]

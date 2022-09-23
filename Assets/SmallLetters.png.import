@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Texto longo.png-b92e873a21aaf5c06093103b62e63fbd.stex"
+path="res://.import/SmallLetters.png-3d01baa0d5c5fa89ea9e53a545c4b202.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Texto longo.png"
-dest_files=[ "res://.import/Texto longo.png-b92e873a21aaf5c06093103b62e63fbd.stex" ]
+source_file="res://Assets/SmallLetters.png"
+dest_files=[ "res://.import/SmallLetters.png-3d01baa0d5c5fa89ea9e53a545c4b202.stex" ]
 
 [params]
 

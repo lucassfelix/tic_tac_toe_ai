@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Fundo tabuleiro.png-b4774c56bb08655480009de8182271c2.stex"
+path="res://.import/LongText.png-0ecd7185809b90999efc3e85c706c7b2.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Fundo tabuleiro.png"
-dest_files=[ "res://.import/Fundo tabuleiro.png-b4774c56bb08655480009de8182271c2.stex" ]
+source_file="res://Assets/LongText.png"
+dest_files=[ "res://.import/LongText.png-0ecd7185809b90999efc3e85c706c7b2.stex" ]
 
 [params]
 
