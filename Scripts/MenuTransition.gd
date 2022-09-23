@@ -1,16 +1,16 @@
 extends Control
 
+var menu_transition_time := 0.5
+var menu_size : Vector2
+
 onready var title_menu = $TitleScreen
 onready var settings_menu = $SettingsScreen
 onready var tween = $Tween
 
-var menu_transition_time := 0.5
-var menu_size : Vector2
 
-# Called when the node enters the scene tree for the first time.
 func _ready():
 	menu_size = get_viewport_rect().size
-	pass # Replace with function body.
+
 
 func move_to_options():
 	tween.interpolate_property(	
@@ -54,3 +54,14 @@ func move_to_title():
 			Tween.EASE_OUT
 		)
 	tween.start()
+
+func move_to_board():
+	$SettingsScreen.hide()
+	$TitleScreen.hide()
+	$Board.show()
+	$Board.reset()
+	
+func move_from_board():
+	$Board.hide()
+	$SettingsScreen.show()
+	$TitleScreen.show()

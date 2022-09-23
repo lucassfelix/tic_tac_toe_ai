@@ -1,10 +1,8 @@
 extends Node
 
-
 var _audioStreamPool : Array
-var _usedStreamPool : Array
+var _avaliablePool : Array
 var _musicStream : AudioStreamMP3
-
 
 func _ready():
 	
@@ -16,28 +14,39 @@ func _ready():
 	newMusicStream.stream = _musicStream
 	newMusicStream.play()
 	
-	for _i in range(3):
-		var newAudioStream := createAudioStream()
-		_audioStreamPool.insert(0,newAudioStream)
+	for i in range(10):
+		var newAudioStream := _create_audio_stream(i)
+		_audioStreamPool.append(newAudioStream)
+		_avaliablePool.append(true)
 	pass
 	
-func createAudioStream() -> AudioStreamPlayer:
+func _create_audio_stream(var index : int) -> AudioStreamPlayer:
 	var newAudioStream := AudioStreamPlayer.new()
-	var err := newAudioStream.connect("finished",self,"_on_Audio_Finished")
+	var _err := newAudioStream.connect("finished",self,"_on_Audio_Finished",[index])
 	add_child(newAudioStream)
 	return newAudioStream
 
-func playSound(soundClip : AudioEvent) -> void:
-	var audioStream : AudioStreamPlayer
-	if _audioStreamPool.size() == 0:
-		audioStream = createAudioStream()
-	else:
-		audioStream = _audioStreamPool.pop_back()
+func play(soundClip : AudioEvent) -> void:
+	
+	var audioStream : AudioStreamPlayer = null
+	
+	for i in range(_audioStreamPool.size()):
+		if _avaliablePool[i]:
+			_avaliablePool[i] = false
+			audioStream = _audioStreamPool[i]
+	
+	if audioStream == null:
+		audioStream = _create_audio_stream(_audioStreamPool.size())
+		_audioStreamPool.append(audioStream)
+		_avaliablePool.append(false)
+		
+			
 	audioStream.stream = soundClip.WavAudioClip
 	audioStream.volume_db = soundClip.volume_dB
 	audioStream.pitch_scale = soundClip.pitch
 	audioStream.play()
-	_usedStreamPool.append(audioStream)
+	
+	
 
-func _on_Audio_Finished():
-	_audioStreamPool.insert(0,_usedStreamPool.pop_back())
+func _on_Audio_Finished(var index : int):
+	_avaliablePool[index] = true

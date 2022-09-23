@@ -1,6 +1,7 @@
-[gd_scene load_steps=19 format=2]
+[gd_scene load_steps=27 format=2]
 
 [ext_resource path="res://Scripts/Board.gd" type="Script" id=1]
+[ext_resource path="res://Scripts/EngamePanels.gd" type="Script" id=2]
 [ext_resource path="res://Resources/Pieces/X_Piece.tres" type="Resource" id=3]
 [ext_resource path="res://Resources/Pieces/Empty_Piece.tres" type="Resource" id=4]
 [ext_resource path="res://Resources/Pieces/O_Piece.tres" type="Resource" id=5]
@@ -8,7 +9,7 @@
 [ext_resource path="res://Assets/Fundo tabuleiro.png" type="Texture" id=7]
 [ext_resource path="res://Assets/Vinheta.png" type="Texture" id=8]
 [ext_resource path="res://Scripts/AIPlayer.gd" type="Script" id=9]
-[ext_resource path="res://Assets/DefeatPanel.png" type="Texture" id=10]
+[ext_resource path="res://Assets/PausePanel.png" type="Texture" id=10]
 [ext_resource path="res://Font/NotoSerif-Black.ttf" type="DynamicFontData" id=11]
 [ext_resource path="res://AudioEvents/ButtonHover.tres" type="Resource" id=12]
 [ext_resource path="res://AudioEvents/PlayButton.tres" type="Resource" id=13]
@@ -17,6 +18,13 @@
 [ext_resource path="res://Assets/WhiteDivider.png" type="Texture" id=16]
 [ext_resource path="res://Assets/PauseNormal.png" type="Texture" id=17]
 [ext_resource path="res://Assets/PauseHover.png" type="Texture" id=18]
+[ext_resource path="res://AudioEvents/TieSound.tres" type="Resource" id=19]
+[ext_resource path="res://AudioEvents/VictorySound.tres" type="Resource" id=20]
+[ext_resource path="res://AudioEvents/DefeatSound.tres" type="Resource" id=21]
+[ext_resource path="res://Assets/VictoryPanel.png" type="Texture" id=22]
+[ext_resource path="res://Assets/TiePanel.png" type="Texture" id=23]
+[ext_resource path="res://Assets/DefeatPanel.png" type="Texture" id=24]
+[ext_resource path="res://AudioEvents/ButtonClick.tres" type="Resource" id=25]
 
 [sub_resource type="DynamicFont" id=1]
 size = 28
@@ -29,6 +37,7 @@ anchor_bottom = 1.0
 script = ExtResource( 1 )
 pieces = [ ExtResource( 4 ), ExtResource( 5 ), ExtResource( 3 ) ]
 ai_node_path = NodePath("AI")
+endgame_path = NodePath("EndgamePanel")
 board_piece = ExtResource( 6 )
 
 [node name="AI" type="Node" parent="."]
@@ -67,16 +76,43 @@ custom_constants/vseparation = 50
 custom_constants/hseparation = 50
 columns = 3
 
-[node name="Panel" type="TextureRect" parent="."]
+[node name="PauseButton" type="Button" parent="."]
+anchor_top = 1.0
+anchor_bottom = 1.0
+margin_left = 64.0
+margin_top = -152.0
+margin_right = 144.0
+margin_bottom = -72.0
+focus_mode = 0
+mouse_default_cursor_shape = 2
+enabled_focus_mode = 0
+icon = ExtResource( 17 )
+flat = true
+script = ExtResource( 14 )
+hovered_texture = ExtResource( 18 )
+normal_texture = ExtResource( 17 )
+clickAudioEvent = ExtResource( 25 )
+hoverAudioEvent = ExtResource( 12 )
+
+[node name="EndgamePanel" type="TextureRect" parent="."]
 visible = false
 anchor_top = 0.5
 anchor_right = 1.0
 anchor_bottom = 0.5
 margin_top = -360.0
 margin_bottom = 360.0
-texture = ExtResource( 10 )
+texture = ExtResource( 24 )
+script = ExtResource( 2 )
+victory_panel = ExtResource( 22 )
+defeat_panel = ExtResource( 24 )
+tie_panel = ExtResource( 23 )
+pause_panel = ExtResource( 10 )
+victory_audio = ExtResource( 20 )
+defeat_audio = ExtResource( 21 )
+tie_audio = ExtResource( 19 )
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Panel"]
+[node name="Pause" type="VBoxContainer" parent="EndgamePanel"]
+visible = false
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
@@ -86,7 +122,62 @@ margin_top = 51.0
 margin_right = 424.0
 margin_bottom = 211.0
 
-[node name="Btn_PlayAgain" type="Button" parent="Panel/VBoxContainer"]
+[node name="Btn_Resume" type="Button" parent="EndgamePanel/Pause"]
+margin_right = 848.0
+margin_bottom = 72.0
+focus_mode = 0
+mouse_default_cursor_shape = 2
+size_flags_vertical = 3
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+custom_colors/font_color_hover = Color( 0.129412, 0.129412, 0.129412, 1 )
+custom_fonts/font = SubResource( 1 )
+enabled_focus_mode = 0
+text = "RETOMAR JOGO"
+flat = true
+icon_align = 1
+script = ExtResource( 14 )
+hovered_texture = ExtResource( 15 )
+clickAudioEvent = ExtResource( 25 )
+hoverAudioEvent = ExtResource( 12 )
+
+[node name="Divider" type="TextureRect" parent="EndgamePanel/Pause"]
+margin_top = 76.0
+margin_right = 848.0
+margin_bottom = 84.0
+texture = ExtResource( 16 )
+stretch_mode = 6
+
+[node name="Btn_ExitToMenu" type="Button" parent="EndgamePanel/Pause"]
+margin_top = 88.0
+margin_right = 848.0
+margin_bottom = 160.0
+focus_mode = 0
+mouse_default_cursor_shape = 2
+size_flags_vertical = 3
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+custom_colors/font_color_hover = Color( 0.129412, 0.129412, 0.129412, 1 )
+custom_fonts/font = SubResource( 1 )
+enabled_focus_mode = 0
+text = "VOLTAR AO MENU"
+flat = true
+icon_align = 1
+script = ExtResource( 14 )
+hovered_texture = ExtResource( 15 )
+clickAudioEvent = ExtResource( 25 )
+hoverAudioEvent = ExtResource( 12 )
+
+[node name="Endgame" type="VBoxContainer" parent="EndgamePanel"]
+visible = false
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -424.0
+margin_top = 51.0
+margin_right = 424.0
+margin_bottom = 211.0
+
+[node name="Btn_PlayAgain" type="Button" parent="EndgamePanel/Endgame"]
 margin_right = 848.0
 margin_bottom = 72.0
 focus_mode = 0
@@ -104,14 +195,14 @@ hovered_texture = ExtResource( 15 )
 clickAudioEvent = ExtResource( 13 )
 hoverAudioEvent = ExtResource( 12 )
 
-[node name="Divider" type="TextureRect" parent="Panel/VBoxContainer"]
+[node name="Divider" type="TextureRect" parent="EndgamePanel/Endgame"]
 margin_top = 76.0
 margin_right = 848.0
 margin_bottom = 84.0
 texture = ExtResource( 16 )
 stretch_mode = 6
 
-[node name="Btn_ExitToMenu" type="Button" parent="Panel/VBoxContainer"]
+[node name="Btn_ExitToMenu" type="Button" parent="EndgamePanel/Endgame"]
 margin_top = 88.0
 margin_right = 848.0
 margin_bottom = 160.0
@@ -127,16 +218,10 @@ flat = true
 icon_align = 1
 script = ExtResource( 14 )
 hovered_texture = ExtResource( 15 )
-clickAudioEvent = ExtResource( 13 )
+clickAudioEvent = ExtResource( 25 )
 hoverAudioEvent = ExtResource( 12 )
 
-[node name="PauseButton" type="TextureButton" parent="."]
-anchor_top = 1.0
-anchor_bottom = 1.0
-margin_left = 64.0
-margin_top = -152.0
-margin_right = 144.0
-margin_bottom = -72.0
-mouse_default_cursor_shape = 2
-texture_normal = ExtResource( 17 )
-texture_hover = ExtResource( 18 )
+[connection signal="pressed" from="PauseButton" to="." method="pause_game"]
+[connection signal="pressed" from="PauseButton" to="EndgamePanel" method="pause"]
+[connection signal="pressed" from="EndgamePanel/Pause/Btn_Resume" to="." method="unpause_game"]
+[connection signal="pressed" from="EndgamePanel/Endgame/Btn_PlayAgain" to="." method="_on_Btn_PlayAgain_pressed"]

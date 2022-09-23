@@ -1,12 +1,17 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://Assets/EmptyHouse.png" type="Texture" id=1]
 [ext_resource path="res://Scripts/BoardSlot.gd" type="Script" id=2]
+[ext_resource path="res://AudioEvents/ButtonHover.tres" type="Resource" id=3]
 
 [node name="BoardSlot" type="TextureButton"]
 margin_right = 40.0
 margin_bottom = 40.0
 mouse_default_cursor_shape = 2
 size_flags_vertical = 3
+action_mode = 0
 texture_normal = ExtResource( 1 )
 script = ExtResource( 2 )
+hover_event = ExtResource( 3 )
+
+[connection signal="mouse_entered" from="." to="." method="_on_BoardSlot_mouse_entered"]

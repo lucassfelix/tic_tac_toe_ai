@@ -1,21 +1,18 @@
+class_name AIPlayer
 extends Node
 
-class_name AIPlayer
-
-const ai_state = -1
-
 export var board_path : NodePath
-var board_node;
-
 export(Resource) var empty_piece_resource
-var EMPTY_PIECE : Piece
-
 export(Resource) var ai_piece_resource
-var AI_PIECE : Piece
-
 export(Resource) var player_piece_resource
-var PLAYER_PIECE : Piece
 
+
+var EMPTY_PIECE : Piece
+var AI_PIECE : Piece
+var PLAYER_PIECE : Piece
+var board_node : Board;
+
+onready var rng := RandomNumberGenerator.new()
 
 func _ready():
 	assert(empty_piece_resource != null, "ERROR: Null resource.")
@@ -28,25 +25,61 @@ func _ready():
 	
 	board_node = get_node(board_path)
 	
-	
-	pass
+	rng.randomize()
 
+func get_ai_play(board : Array) -> Array:
+	
+	if GameVariables.difficulty == GameVariables.DIFFICULTY.TRIVIAL:
+		return _random_play(board)
+		
+	#MODO FÁCIL == 50% de chance de usar o _minimax
+	elif GameVariables.difficulty == GameVariables.DIFFICULTY.EASY:
+		
+		if rng.randi() % 2 == 0:
+			var possible_plays : Array = _minimax(board, true)[1]
+			return possible_plays[rng.randi_range(0,possible_plays.size()-1)]
+		else:
+			return _random_play(board)
+	
+	#MODO Médio == 75% de chance de usar o _minimax
+	elif GameVariables.difficulty == GameVariables.DIFFICULTY.MEDIUM:
+			
+		var aux := [1,2,3,4]
+		var result : int = aux[rng.randi_range(0,aux.size()-1)]
+		if result != 4:
+			var possible_plays : Array = _minimax(board, true)[1]
+			return possible_plays[rng.randi_range(0,possible_plays.size()-1)]
+		else:
+			return _random_play(board)
+		
+	#MODO Difícil == 100% de chance de usar o _minimax
+	else:
+		var possible_plays : Array = _minimax(board, true)[1]
+		return possible_plays[rng.randi_range(0,possible_plays.size()-1)]
 
-func choose_ai_play() -> void:
-	pass
+func _random_play(board : Array) -> Array:
+	var open_tiles :Array = []
+	var board_size := board.size()
+	for i in range(board_size):
+		for j in range(board_size):
+			if board[i][j] == EMPTY_PIECE.value:
+				open_tiles.append([i,j])
+	return open_tiles[rng.randi_range(0,open_tiles.size()-1)]
+
+func _minimax(board : Array, ai_turn : bool) -> Array:
 	
+	#Captura o size do board
+	var board_size :int = board_node.board_size
 	
-func minimax(board : Array, ai_turn : bool) -> Array:
-	
-	var board_size : int = len(board)
-	
-	var endgame : int =  board_node.endgame(board,ai_state)
-	
+	#Avalia se o jogo acabou.
+	var endgame : int =  board_node.endgame(board,AI_PIECE.value)
 	if endgame != 2:
+		#Se acabou, retorna o score do resultado final.
 		return [endgame, []]
 		
 	var max_play = [-10, []]
 	var min_play = [10, []]
+	
 	
 	for row in range(board_size):
 		for col in range(board_size):
@@ -57,14 +90,18 @@ func minimax(board : Array, ai_turn : bool) -> Array:
 				else:
 					board[row][col] = PLAYER_PIECE.value
 					
-				var result = minimax(board, !ai_turn)
+				var result = _minimax(board, !ai_turn)
 				
 				if ai_turn:
-					if result[0] > max_play[0]:
-						max_play = [result[0],[row,col]]
+					if result[0] == max_play[0]:
+						max_play[1].append([row,col])
+					elif result[0] > max_play[0]:
+						max_play = [result[0],[[row,col]]]
 				else:
-					if result[0] < min_play[0]:
-						min_play = [result[0],[row,col]]
+					if result[0] == max_play[0]:
+						min_play[1].append([row,col])
+					elif result[0] < min_play[0]:
+						min_play = [result[0],[[row,col]]]
 			
 				board[row][col] = EMPTY_PIECE.value
 			

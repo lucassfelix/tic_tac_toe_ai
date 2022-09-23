@@ -24,10 +24,15 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://Scripts/Board.gd"
 }, {
-"base": "Resource",
-"class": "IntegerVar",
+"base": "TextureButton",
+"class": "BoardSlot",
 "language": "GDScript",
-"path": "res://IntegerVar.gd"
+"path": "res://Scripts/BoardSlot.gd"
+}, {
+"base": "TextureRect",
+"class": "EndgamePanels",
+"language": "GDScript",
+"path": "res://Scripts/EngamePanels.gd"
 }, {
 "base": "Resource",
 "class": "Piece",
@@ -43,7 +48,8 @@ _global_script_class_icons={
 "AIPlayer": "",
 "AudioEvent": "",
 "Board": "",
-"IntegerVar": "",
+"BoardSlot": "",
+"EndgamePanels": "",
 "Piece": "",
 "VARIABLES": ""
 }
@@ -51,7 +57,7 @@ _global_script_class_icons={
 [application]
 
 config/name="Tic Tac Toe IA"
-run/main_scene="res://Scenes/Menu.tscn"
+run/main_scene="res://Scenes/Game.tscn"
 boot_splash/image="res://Assets/Logo.png"
 boot_splash/fullsize=false
 boot_splash/bg_color=Color( 0.941176, 0.929412, 0.894118, 1 )

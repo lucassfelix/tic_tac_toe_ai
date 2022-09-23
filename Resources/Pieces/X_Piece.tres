@@ -1,12 +1,14 @@
-[gd_resource type="Resource" load_steps=4 format=2]
+[gd_resource type="Resource" load_steps=5 format=2]
 
 [ext_resource path="res://Piece.gd" type="Script" id=1]
 [ext_resource path="res://Assets/BlackHover.png" type="Texture" id=2]
 [ext_resource path="res://Assets/BlackPiece.png" type="Texture" id=3]
+[ext_resource path="res://AudioEvents/BlackPiece.tres" type="Resource" id=4]
 
 [resource]
 script = ExtResource( 1 )
 piece_name = "X"
 value = -1
 texture = ExtResource( 3 )
-hoverTexture = ExtResource( 2 )
+hover = ExtResource( 2 )
+audio_event = ExtResource( 4 )
