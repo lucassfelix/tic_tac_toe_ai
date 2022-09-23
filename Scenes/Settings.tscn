@@ -1,10 +1,10 @@
 [gd_scene load_steps=12 format=2]
 
-[ext_resource path="res://Scenes/MenuButton.gd" type="Script" id=1]
+[ext_resource path="res://Scripts/MenuButton.gd" type="Script" id=1]
 [ext_resource path="res://Font/NotoSerif-Black.ttf" type="DynamicFontData" id=2]
 [ext_resource path="res://Assets/Fundo.png" type="Texture" id=3]
 [ext_resource path="res://Assets/Letreiro.png" type="Texture" id=4]
-[ext_resource path="res://Assets/Brush escuro.png" type="Texture" id=5]
+[ext_resource path="res://Assets/BlackBrush.png" type="Texture" id=5]
 [ext_resource path="res://InitialMovement.tres" type="ButtonGroup" id=6]
 [ext_resource path="res://DifficultyGroup.tres" type="ButtonGroup" id=7]
 [ext_resource path="res://Scenes/Prefabs/RadioButton.tscn" type="PackedScene" id=8]

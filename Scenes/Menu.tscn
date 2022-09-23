@@ -1,0 +1,426 @@
+[gd_scene load_steps=23 format=2]
+
+[ext_resource path="res://Font/NotoSerif-Black.ttf" type="DynamicFontData" id=1]
+[ext_resource path="res://Assets/BlackBrush.png" type="Texture" id=2]
+[ext_resource path="res://AudioEvents/ButtonClick.tres" type="Resource" id=3]
+[ext_resource path="res://AudioEvents/ButtonHover.tres" type="Resource" id=4]
+[ext_resource path="res://AudioEvents/PlayButton.tres" type="Resource" id=5]
+[ext_resource path="res://Scenes/Prefabs/RadioButton.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Assets/Fundo.png" type="Texture" id=7]
+[ext_resource path="res://Assets/Letreiro.png" type="Texture" id=8]
+[ext_resource path="res://Assets/Texto longo.png" type="Texture" id=9]
+[ext_resource path="res://Assets/Logo.png" type="Texture" id=10]
+[ext_resource path="res://Scripts/MenuButton.gd" type="Script" id=11]
+[ext_resource path="res://Scripts/MenuTransition.gd" type="Script" id=12]
+[ext_resource path="res://Assets/Vinheta.png" type="Texture" id=13]
+[ext_resource path="res://Assets/Separador.png" type="Texture" id=14]
+[ext_resource path="res://Assets/Letreiro pequeno.png" type="Texture" id=15]
+[ext_resource path="res://Assets/Credits.png" type="Texture" id=16]
+
+[sub_resource type="DynamicFont" id=1]
+size = 32
+extra_spacing_char = 7
+font_data = ExtResource( 1 )
+
+[sub_resource type="DynamicFont" id=2]
+size = 48
+extra_spacing_char = 7
+font_data = ExtResource( 1 )
+
+[sub_resource type="ButtonGroup" id=3]
+
+[sub_resource type="ButtonGroup" id=4]
+
+[sub_resource type="ButtonGroup" id=5]
+
+[sub_resource type="DynamicFont" id=6]
+size = 44
+extra_spacing_char = 7
+font_data = ExtResource( 1 )
+
+[node name="CanvasLayer" type="CanvasLayer"]
+
+[node name="Background" type="TextureRect" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = -420.0
+margin_right = 3800.0
+margin_bottom = 3380.0
+rect_scale = Vector2( 0.5, 0.5 )
+texture = ExtResource( 7 )
+
+[node name="Border" type="TextureRect" parent="."]
+modulate = Color( 1, 1, 1, 0.235294 )
+margin_right = 1920.0
+margin_bottom = 1080.0
+texture = ExtResource( 13 )
+
+[node name="Menu" type="Control" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 12 )
+
+[node name="Tween" type="Tween" parent="Menu"]
+
+[node name="SettingsScreen" type="Control" parent="Menu"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = 1080.0
+margin_bottom = 1080.0
+
+[node name="Voltar" type="Button" parent="Menu/SettingsScreen"]
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = -500.0
+margin_top = -243.0
+margin_right = 500.0
+margin_bottom = -117.0
+focus_mode = 0
+mouse_default_cursor_shape = 2
+size_flags_vertical = 3
+custom_colors/font_color = Color( 0.129412, 0.129412, 0.129412, 1 )
+custom_colors/font_color_hover = Color( 1, 1, 1, 1 )
+custom_fonts/font = SubResource( 1 )
+enabled_focus_mode = 0
+text = "VOLTAR AO MENU"
+flat = true
+icon_align = 1
+script = ExtResource( 11 )
+hovered_texture = ExtResource( 2 )
+clickAudioEvent = ExtResource( 3 )
+hoverAudioEvent = ExtResource( 4 )
+
+[node name="LargeRightLabel2" type="TextureRect" parent="Menu/SettingsScreen"]
+modulate = Color( 1, 1, 1, 0.490196 )
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+margin_left = -308.0
+margin_top = -258.0
+margin_right = -51.0
+margin_bottom = 1360.0
+texture = ExtResource( 9 )
+
+[node name="LetreiroEsquerda" type="TextureRect" parent="Menu/SettingsScreen/LargeRightLabel2"]
+modulate = Color( 1, 1, 1, 0.14902 )
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+margin_left = -226.0
+margin_top = -1165.5
+margin_right = -38.0
+margin_bottom = 63.5
+texture = ExtResource( 8 )
+
+[node name="Options" type="VBoxContainer" parent="Menu/SettingsScreen"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -960.0
+margin_top = -435.5
+margin_right = 960.0
+margin_bottom = 235.5
+
+[node name="Versus" type="HBoxContainer" parent="Menu/SettingsScreen/Options"]
+margin_right = 1920.0
+margin_bottom = 221.0
+size_flags_vertical = 3
+custom_constants/separation = 79
+alignment = 1
+
+[node name="VS_Label" type="Label" parent="Menu/SettingsScreen/Options/Versus"]
+margin_top = 77.0
+margin_right = 920.0
+margin_bottom = 144.0
+size_flags_horizontal = 3
+custom_colors/font_color = Color( 0.129412, 0.129412, 0.129412, 1 )
+custom_fonts/font = SubResource( 2 )
+text = "MODO"
+align = 2
+valign = 1
+
+[node name="VS_Choices" type="VBoxContainer" parent="Menu/SettingsScreen/Options/Versus"]
+margin_left = 999.0
+margin_right = 1920.0
+margin_bottom = 221.0
+size_flags_horizontal = 3
+alignment = 1
+
+[node name="VS_Cpu" parent="Menu/SettingsScreen/Options/Versus/VS_Choices" instance=ExtResource( 6 )]
+margin_top = 66.0
+margin_right = 921.0
+margin_bottom = 108.0
+pressed = true
+group = SubResource( 3 )
+text = "VS. COMPUTADOR"
+game_mode = 1
+
+[node name="VS_Player" parent="Menu/SettingsScreen/Options/Versus/VS_Choices" instance=ExtResource( 6 )]
+margin_top = 112.0
+margin_right = 921.0
+margin_bottom = 154.0
+group = SubResource( 3 )
+text = "VS. JOGADOR"
+
+[node name="Difficulty" type="HBoxContainer" parent="Menu/SettingsScreen/Options"]
+margin_top = 225.0
+margin_right = 1920.0
+margin_bottom = 446.0
+size_flags_vertical = 3
+custom_constants/separation = 79
+alignment = 1
+
+[node name="DIFF_Label" type="Label" parent="Menu/SettingsScreen/Options/Difficulty"]
+margin_top = 77.0
+margin_right = 920.0
+margin_bottom = 144.0
+size_flags_horizontal = 3
+custom_colors/font_color = Color( 0.129412, 0.129412, 0.129412, 1 )
+custom_fonts/font = SubResource( 2 )
+text = "DIFICULDADE"
+align = 2
+valign = 1
+
+[node name="DIFF_Choices" type="VBoxContainer" parent="Menu/SettingsScreen/Options/Difficulty"]
+margin_left = 999.0
+margin_right = 1920.0
+margin_bottom = 221.0
+size_flags_horizontal = 3
+alignment = 1
+
+[node name="DIFF_Trivial" parent="Menu/SettingsScreen/Options/Difficulty/DIFF_Choices" instance=ExtResource( 6 )]
+margin_top = 20.0
+margin_right = 921.0
+margin_bottom = 62.0
+group = SubResource( 4 )
+buttonOption = 1
+
+[node name="DIFF_Easy" parent="Menu/SettingsScreen/Options/Difficulty/DIFF_Choices" instance=ExtResource( 6 )]
+margin_top = 66.0
+margin_right = 921.0
+margin_bottom = 108.0
+group = SubResource( 4 )
+text = "FÁCIL"
+buttonOption = 1
+difficulty = 1
+
+[node name="DIFF_Medium" parent="Menu/SettingsScreen/Options/Difficulty/DIFF_Choices" instance=ExtResource( 6 )]
+margin_top = 112.0
+margin_right = 921.0
+margin_bottom = 154.0
+pressed = true
+group = SubResource( 4 )
+text = "MÉDIO"
+buttonOption = 1
+difficulty = 2
+
+[node name="DIFF_Hard" parent="Menu/SettingsScreen/Options/Difficulty/DIFF_Choices" instance=ExtResource( 6 )]
+margin_top = 158.0
+margin_right = 921.0
+margin_bottom = 200.0
+group = SubResource( 4 )
+text = "DIFÍCIL"
+buttonOption = 1
+difficulty = 3
+
+[node name="InitialMovement" type="HBoxContainer" parent="Menu/SettingsScreen/Options"]
+margin_top = 450.0
+margin_right = 1920.0
+margin_bottom = 671.0
+size_flags_vertical = 3
+custom_constants/separation = 79
+alignment = 1
+
+[node name="MOV_Label" type="Label" parent="Menu/SettingsScreen/Options/InitialMovement"]
+margin_right = 920.0
+margin_bottom = 221.0
+size_flags_horizontal = 3
+size_flags_vertical = 5
+custom_colors/font_color = Color( 0.129412, 0.129412, 0.129412, 1 )
+custom_fonts/font = SubResource( 2 )
+text = "MOVIMENTO INICIAL"
+align = 2
+valign = 1
+
+[node name="MOV_Choices" type="VBoxContainer" parent="Menu/SettingsScreen/Options/InitialMovement"]
+margin_left = 999.0
+margin_right = 1920.0
+margin_bottom = 221.0
+size_flags_horizontal = 3
+alignment = 1
+
+[node name="MOV_Player" parent="Menu/SettingsScreen/Options/InitialMovement/MOV_Choices" instance=ExtResource( 6 )]
+margin_top = 43.0
+margin_right = 921.0
+margin_bottom = 85.0
+group = SubResource( 5 )
+text = "JOGADOR"
+buttonOption = 2
+
+[node name="MOV_Cpu" parent="Menu/SettingsScreen/Options/InitialMovement/MOV_Choices" instance=ExtResource( 6 )]
+margin_top = 89.0
+margin_right = 921.0
+margin_bottom = 131.0
+group = SubResource( 5 )
+text = "COMPUTADOR"
+buttonOption = 2
+first = 1
+
+[node name="MOV_Rand" parent="Menu/SettingsScreen/Options/InitialMovement/MOV_Choices" instance=ExtResource( 6 )]
+margin_top = 135.0
+margin_right = 921.0
+margin_bottom = 177.0
+pressed = true
+group = SubResource( 5 )
+text = "ALEATÓRIO"
+buttonOption = 2
+first = 2
+
+[node name="TitleScreen" type="Control" parent="Menu"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="Logo" type="TextureRect" parent="Menu/TitleScreen"]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -280.0
+margin_top = 108.0
+margin_right = 280.0
+margin_bottom = 520.0
+texture = ExtResource( 10 )
+stretch_mode = 1
+
+[node name="LargeLeftLabel" type="TextureRect" parent="Menu/TitleScreen"]
+modulate = Color( 1, 1, 1, 0.14902 )
+anchor_top = 0.5
+anchor_bottom = 0.5
+margin_left = 62.0
+margin_top = -614.5
+margin_right = 250.0
+margin_bottom = 614.5
+texture = ExtResource( 8 )
+
+[node name="LargeRightLabel" type="TextureRect" parent="Menu/TitleScreen"]
+modulate = Color( 1, 1, 1, 0.490196 )
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+margin_left = -308.0
+margin_top = -809.0
+margin_right = -51.0
+margin_bottom = 809.0
+texture = ExtResource( 9 )
+
+[node name="SmallRightLabel" type="TextureRect" parent="Menu/TitleScreen"]
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+margin_left = -213.0
+margin_top = -231.0
+margin_right = -144.0
+margin_bottom = 231.0
+texture = ExtResource( 15 )
+
+[node name="Credits" type="TextureRect" parent="Menu/TitleScreen"]
+anchor_top = 1.0
+anchor_bottom = 1.0
+margin_left = 51.0
+margin_top = -212.0
+margin_right = 307.0
+margin_bottom = -80.0
+texture = ExtResource( 16 )
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Menu/TitleScreen"]
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = -500.0
+margin_top = -481.0
+margin_right = 500.0
+margin_bottom = -71.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="Btn_Play" type="Button" parent="Menu/TitleScreen/VBoxContainer"]
+margin_right = 1000.0
+margin_bottom = 126.0
+focus_mode = 0
+mouse_default_cursor_shape = 2
+size_flags_vertical = 3
+custom_colors/font_color = Color( 0.129412, 0.129412, 0.129412, 1 )
+custom_colors/font_color_hover = Color( 1, 1, 1, 1 )
+custom_fonts/font = SubResource( 6 )
+enabled_focus_mode = 0
+text = "JOGAR"
+flat = true
+icon_align = 1
+script = ExtResource( 11 )
+hovered_texture = ExtResource( 2 )
+clickAudioEvent = ExtResource( 5 )
+hoverAudioEvent = ExtResource( 4 )
+
+[node name="Divider" type="TextureRect" parent="Menu/TitleScreen/VBoxContainer"]
+margin_top = 130.0
+margin_right = 1000.0
+margin_bottom = 138.0
+texture = ExtResource( 14 )
+stretch_mode = 6
+
+[node name="Btn_Options" type="Button" parent="Menu/TitleScreen/VBoxContainer"]
+margin_top = 142.0
+margin_right = 1000.0
+margin_bottom = 268.0
+focus_mode = 0
+mouse_default_cursor_shape = 2
+size_flags_vertical = 3
+custom_colors/font_color = Color( 0.129412, 0.129412, 0.129412, 1 )
+custom_colors/font_color_hover = Color( 1, 1, 1, 1 )
+custom_fonts/font = SubResource( 6 )
+enabled_focus_mode = 0
+text = "OPÇÕES"
+flat = true
+icon_align = 1
+script = ExtResource( 11 )
+hovered_texture = ExtResource( 2 )
+clickAudioEvent = ExtResource( 3 )
+hoverAudioEvent = ExtResource( 4 )
+
+[node name="Divider2" type="TextureRect" parent="Menu/TitleScreen/VBoxContainer"]
+margin_top = 272.0
+margin_right = 1000.0
+margin_bottom = 280.0
+texture = ExtResource( 14 )
+stretch_mode = 6
+
+[node name="Btn_Exit" type="Button" parent="Menu/TitleScreen/VBoxContainer"]
+margin_top = 284.0
+margin_right = 1000.0
+margin_bottom = 410.0
+focus_mode = 0
+mouse_default_cursor_shape = 2
+size_flags_vertical = 3
+custom_colors/font_color = Color( 0.129412, 0.129412, 0.129412, 1 )
+custom_colors/font_color_hover = Color( 1, 1, 1, 1 )
+custom_fonts/font = SubResource( 6 )
+enabled_focus_mode = 0
+text = "SAIR"
+flat = true
+icon_align = 1
+script = ExtResource( 11 )
+hovered_texture = ExtResource( 2 )
+clickAudioEvent = ExtResource( 3 )
+hoverAudioEvent = ExtResource( 4 )
+
+[connection signal="mouse_entered" from="Menu/SettingsScreen/Voltar" to="Menu/SettingsScreen/Voltar" method="_on_Button_mouse_entered"]
+[connection signal="mouse_exited" from="Menu/SettingsScreen/Voltar" to="Menu/SettingsScreen/Voltar" method="_on_Button_mouse_exited"]
+[connection signal="pressed" from="Menu/SettingsScreen/Voltar" to="Menu" method="move_to_title"]
+[connection signal="pressed" from="Menu/TitleScreen/VBoxContainer/Btn_Options" to="Menu" method="move_to_options"]

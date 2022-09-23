@@ -1,10 +1,13 @@
 [gd_resource type="Resource" load_steps=3 format=2]
 
 [ext_resource path="res://Piece.gd" type="Script" id=1]
-[ext_resource path="res://Assets/CasaVazia.png" type="Texture" id=2]
+
+[sub_resource type="StreamTexture" id=1]
+flags = 4
+load_path = "res://.import/CasaVazia.png-cac8c5466975292fa73b9683b7d66054.stex"
 
 [resource]
 script = ExtResource( 1 )
 piece_name = " "
 value = 0
-texture = ExtResource( 2 )
+texture = SubResource( 1 )

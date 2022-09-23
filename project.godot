@@ -14,6 +14,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://Scripts/AIPlayer.gd"
 }, {
+"base": "Resource",
+"class": "AudioEvent",
+"language": "GDScript",
+"path": "res://Scripts/AudioEvent.gd"
+}, {
 "base": "Control",
 "class": "Board",
 "language": "GDScript",
@@ -28,29 +33,40 @@ _global_script_classes=[ {
 "class": "Piece",
 "language": "GDScript",
 "path": "res://Piece.gd"
+}, {
+"base": "Node",
+"class": "VARIABLES",
+"language": "GDScript",
+"path": "res://Scripts/GameVariables.gd"
 } ]
 _global_script_class_icons={
 "AIPlayer": "",
+"AudioEvent": "",
 "Board": "",
 "IntegerVar": "",
-"Piece": ""
+"Piece": "",
+"VARIABLES": ""
 }
 
 [application]
 
 config/name="Tic Tac Toe IA"
-run/main_scene="res://Scenes/TitleScreen.tscn"
-boot_splash/bg_color=Color( 0.298039, 0.0705882, 0.0705882, 1 )
-config/icon="res://icon.png"
+run/main_scene="res://Scenes/Menu.tscn"
+boot_splash/image="res://Assets/Logo.png"
+boot_splash/fullsize=false
+boot_splash/bg_color=Color( 0.941176, 0.929412, 0.894118, 1 )
+config/icon="res://Assets/Icon.png"
+
+[autoload]
+
+AudioManager="*res://Scripts/AudioManager.gd"
+GameVariables="*res://Scripts/GameVariables.gd"
 
 [display]
 
 window/size/width=1920
 window/size/height=1080
-window/size/resizable=false
-window/size/borderless=true
-window/size/fullscreen=true
-window/stretch/mode="viewport"
+window/stretch/mode="2d"
 window/stretch/aspect="keep"
 window/bg_color=Color( 0.141176, 0.141176, 0.141176, 1 )
 window/use_filter=false

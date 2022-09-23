@@ -1,22 +1,42 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=19 format=2]
 
 [ext_resource path="res://Scripts/Board.gd" type="Script" id=1]
-[ext_resource path="res://Resources/Variables/BoardSize.tres" type="Resource" id=2]
 [ext_resource path="res://Resources/Pieces/X_Piece.tres" type="Resource" id=3]
 [ext_resource path="res://Resources/Pieces/Empty_Piece.tres" type="Resource" id=4]
 [ext_resource path="res://Resources/Pieces/O_Piece.tres" type="Resource" id=5]
-[ext_resource path="res://Scenes/Prefabs/BoardPiece.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Scenes/Prefabs/BoardSlot.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Assets/Fundo tabuleiro.png" type="Texture" id=7]
 [ext_resource path="res://Assets/Vinheta.png" type="Texture" id=8]
+[ext_resource path="res://Scripts/AIPlayer.gd" type="Script" id=9]
+[ext_resource path="res://Assets/DefeatPanel.png" type="Texture" id=10]
+[ext_resource path="res://Font/NotoSerif-Black.ttf" type="DynamicFontData" id=11]
+[ext_resource path="res://AudioEvents/ButtonHover.tres" type="Resource" id=12]
+[ext_resource path="res://AudioEvents/PlayButton.tres" type="Resource" id=13]
+[ext_resource path="res://Scripts/MenuButton.gd" type="Script" id=14]
+[ext_resource path="res://Assets/WhiteBrush.png" type="Texture" id=15]
+[ext_resource path="res://Assets/WhiteDivider.png" type="Texture" id=16]
+[ext_resource path="res://Assets/PauseNormal.png" type="Texture" id=17]
+[ext_resource path="res://Assets/PauseHover.png" type="Texture" id=18]
+
+[sub_resource type="DynamicFont" id=1]
+size = 28
+extra_spacing_char = 7
+font_data = ExtResource( 11 )
 
 [node name="Board" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 script = ExtResource( 1 )
 pieces = [ ExtResource( 4 ), ExtResource( 5 ), ExtResource( 3 ) ]
-ai_node_path = NodePath("../AI")
-board_size_resource = ExtResource( 2 )
+ai_node_path = NodePath("AI")
 board_piece = ExtResource( 6 )
+
+[node name="AI" type="Node" parent="."]
+script = ExtResource( 9 )
+board_path = NodePath("..")
+empty_piece_resource = ExtResource( 4 )
+ai_piece_resource = ExtResource( 5 )
+player_piece_resource = ExtResource( 3 )
 
 [node name="Fundo" type="TextureRect" parent="."]
 anchor_right = 1.0
@@ -46,3 +66,77 @@ rect_pivot_offset = Vector2( -762, 275 )
 custom_constants/vseparation = 50
 custom_constants/hseparation = 50
 columns = 3
+
+[node name="Panel" type="TextureRect" parent="."]
+visible = false
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+margin_top = -360.0
+margin_bottom = 360.0
+texture = ExtResource( 10 )
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -424.0
+margin_top = 51.0
+margin_right = 424.0
+margin_bottom = 211.0
+
+[node name="Btn_PlayAgain" type="Button" parent="Panel/VBoxContainer"]
+margin_right = 848.0
+margin_bottom = 72.0
+focus_mode = 0
+mouse_default_cursor_shape = 2
+size_flags_vertical = 3
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+custom_colors/font_color_hover = Color( 0.129412, 0.129412, 0.129412, 1 )
+custom_fonts/font = SubResource( 1 )
+enabled_focus_mode = 0
+text = "JOGAR NOVAMENTE"
+flat = true
+icon_align = 1
+script = ExtResource( 14 )
+hovered_texture = ExtResource( 15 )
+clickAudioEvent = ExtResource( 13 )
+hoverAudioEvent = ExtResource( 12 )
+
+[node name="Divider" type="TextureRect" parent="Panel/VBoxContainer"]
+margin_top = 76.0
+margin_right = 848.0
+margin_bottom = 84.0
+texture = ExtResource( 16 )
+stretch_mode = 6
+
+[node name="Btn_ExitToMenu" type="Button" parent="Panel/VBoxContainer"]
+margin_top = 88.0
+margin_right = 848.0
+margin_bottom = 160.0
+focus_mode = 0
+mouse_default_cursor_shape = 2
+size_flags_vertical = 3
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+custom_colors/font_color_hover = Color( 0.129412, 0.129412, 0.129412, 1 )
+custom_fonts/font = SubResource( 1 )
+enabled_focus_mode = 0
+text = "VOLTAR AO MENU"
+flat = true
+icon_align = 1
+script = ExtResource( 14 )
+hovered_texture = ExtResource( 15 )
+clickAudioEvent = ExtResource( 13 )
+hoverAudioEvent = ExtResource( 12 )
+
+[node name="PauseButton" type="TextureButton" parent="."]
+anchor_top = 1.0
+anchor_bottom = 1.0
+margin_left = 64.0
+margin_top = -152.0
+margin_right = 144.0
+margin_bottom = -72.0
+mouse_default_cursor_shape = 2
+texture_normal = ExtResource( 17 )
+texture_hover = ExtResource( 18 )

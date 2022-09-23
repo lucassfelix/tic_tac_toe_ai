@@ -1,8 +1,9 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
+[ext_resource path="res://Scripts/DifficultyRadial.gd" type="Script" id=1]
 [ext_resource path="res://Font/NotoSerif-Black.ttf" type="DynamicFontData" id=2]
-[ext_resource path="res://Assets/Botão de rádio.png" type="Texture" id=3]
-[ext_resource path="res://Assets/Botão de rádio vazio.png" type="Texture" id=4]
+[ext_resource path="res://Assets/RadioIcon.png" type="Texture" id=3]
+[ext_resource path="res://Assets/EmptyRadioIcon.png" type="Texture" id=4]
 
 [sub_resource type="DynamicFont" id=3]
 size = 24
@@ -21,7 +22,7 @@ mouse_default_cursor_shape = 2
 custom_colors/font_color_focus = Color( 0.952941, 0.317647, 0.317647, 1 )
 custom_colors/font_color_hover_pressed = Color( 0.952941, 0.317647, 0.317647, 1 )
 custom_colors/font_color = Color( 0.129412, 0.129412, 0.129412, 1 )
-custom_colors/font_color_hover = Color( 0.129412, 0.129412, 0.129412, 1 )
+custom_colors/font_color_hover = Color( 0.952941, 0.317647, 0.317647, 1 )
 custom_colors/font_color_pressed = Color( 0.952941, 0.317647, 0.317647, 1 )
 custom_constants/hseparation = 23
 custom_fonts/font = SubResource( 3 )
@@ -34,3 +35,4 @@ action_mode = 0
 enabled_focus_mode = 0
 group = SubResource( 4 )
 text = "TRIVIAL"
+script = ExtResource( 1 )

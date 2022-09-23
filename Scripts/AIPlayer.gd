@@ -10,15 +10,21 @@ var board_node;
 export(Resource) var empty_piece_resource
 var EMPTY_PIECE : Piece
 
-export(Resource) var player_ai_resource
+export(Resource) var ai_piece_resource
 var AI_PIECE : Piece
+
+export(Resource) var player_piece_resource
+var PLAYER_PIECE : Piece
 
 
 func _ready():
 	assert(empty_piece_resource != null, "ERROR: Null resource.")
-	assert(player_ai_resource != null, "ERROR: Null resource.")	
+	assert(ai_piece_resource != null, "ERROR: Null resource.")	
+	assert(player_piece_resource != null, "ERROR: Null resource.")	
+	
 	EMPTY_PIECE = empty_piece_resource
-	AI_PIECE = player_ai_resource
+	AI_PIECE = ai_piece_resource
+	PLAYER_PIECE = player_piece_resource
 	
 	board_node = get_node(board_path)
 	
@@ -49,7 +55,7 @@ func minimax(board : Array, ai_turn : bool) -> Array:
 				if ai_turn:
 					board[row][col] = AI_PIECE.value
 				else:
-					board[row][col] = -AI_PIECE.value
+					board[row][col] = PLAYER_PIECE.value
 					
 				var result = minimax(board, !ai_turn)
 				
