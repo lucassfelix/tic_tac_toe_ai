@@ -21,10 +21,14 @@ func _ready() -> void:
 	rng.randomize()
 				
 	_setup_board()
+	
+	print("Carregado") # Indica se o tabuleiro foi carregado
 			
 func _setup_board() -> void:
 	
 	var grid = $GridContainer
+	
+	print("Gerado") # Indica se o tabuleiro foi gerado
 	
 	grid.columns = board_size
 	game_board = []

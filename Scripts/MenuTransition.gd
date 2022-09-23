@@ -10,6 +10,7 @@ onready var tween = $Tween
 
 func _ready():
 	menu_size = get_viewport_rect().size
+	$Board.hide()
 
 
 func move_to_options():
@@ -56,12 +57,17 @@ func move_to_title():
 	tween.start()
 
 func move_to_board():
+	$Board.show()
+#	$Board._ready() # Faz o tabuleiro aparecer, mas meio bugado
+#	$Board._setup_board() # Se o setup é chamado daqui o tabuleiro não aparece
 	$SettingsScreen.hide()
 	$TitleScreen.hide()
-	$Board.show()
 	$Board.reset()
 	
 func move_from_board():
 	$Board.hide()
 	$SettingsScreen.show()
 	$TitleScreen.show()
+
+func exit_game() -> void:
+	get_tree().quit()

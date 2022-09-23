@@ -10,7 +10,7 @@ func _ready():
 	
 	var newMusicStream := AudioStreamPlayer.new()
 	add_child(newMusicStream)
-	newMusicStream.volume_db = -15
+#	newMusicStream.volume_db = -15
 	newMusicStream.stream = _musicStream
 	newMusicStream.play()
 	

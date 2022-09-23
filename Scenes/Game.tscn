@@ -644,6 +644,7 @@ hoverAudioEvent = ExtResource( 5 )
 [connection signal="pressed" from="Menu/SettingsScreen/Voltar" to="Menu" method="move_to_title"]
 [connection signal="pressed" from="Menu/TitleScreen/VBoxContainer/Btn_Play" to="Menu" method="move_to_board"]
 [connection signal="pressed" from="Menu/TitleScreen/VBoxContainer/Btn_Options" to="Menu" method="move_to_options"]
+[connection signal="pressed" from="Menu/TitleScreen/VBoxContainer/Btn_Exit" to="Menu" method="exit_game"]
 [connection signal="pressed" from="Menu/Board/PauseButton" to="Menu/Board" method="pause_game"]
 [connection signal="pressed" from="Menu/Board/PauseButton" to="Menu/Board/EndgamePanel" method="pause"]
 [connection signal="pressed" from="Menu/Board/EndgamePanel/Pause/Btn_Resume" to="Menu/Board" method="unpause_game"]

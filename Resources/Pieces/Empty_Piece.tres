@@ -4,7 +4,6 @@
 
 [sub_resource type="StreamTexture" id=1]
 flags = 4
-load_path = "res://.import/CasaVazia.png-cac8c5466975292fa73b9683b7d66054.stex"
 
 [resource]
 script = ExtResource( 1 )

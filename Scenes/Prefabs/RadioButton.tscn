@@ -1,9 +1,11 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://Scripts/DifficultyRadial.gd" type="Script" id=1]
 [ext_resource path="res://Font/NotoSerif-Black.ttf" type="DynamicFontData" id=2]
 [ext_resource path="res://Assets/RadioIcon.png" type="Texture" id=3]
 [ext_resource path="res://Assets/EmptyRadioIcon.png" type="Texture" id=4]
+[ext_resource path="res://AudioEvents/ButtonHover.tres" type="Resource" id=5]
+[ext_resource path="res://AudioEvents/ButtonClick.tres" type="Resource" id=6]
 
 [sub_resource type="DynamicFont" id=3]
 size = 24
@@ -36,3 +38,5 @@ enabled_focus_mode = 0
 group = SubResource( 4 )
 text = "TRIVIAL"
 script = ExtResource( 1 )
+hoverAudioEvent = ExtResource( 5 )
+clickAudioEvent = ExtResource( 6 )
